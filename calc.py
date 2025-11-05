@@ -60,7 +60,8 @@ try:
             or calc == "exit"
             or calc == "quit()"
             or calc == "quit"
-            or calc == "q"):
+            or calc == "q")
+            or calc == ":q"):
             exit()
         try:
             calc = re.sub(r'([0-9]+)i', r'\1j', calc)
