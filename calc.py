@@ -60,7 +60,7 @@ try:
             or calc == "exit"
             or calc == "quit()"
             or calc == "quit"
-            or calc == "q")
+            or calc == "q"
             or calc == ":q"):
             exit()
         try:
@@ -68,9 +68,18 @@ try:
             calc = calc.replace('decimal.', 'decimals.')
             calc = calc.replace('random.', 'randoms.')
             try:
-                res = eval(calc)
+                res = eval(calc, globals(), globals())
+            except SyntaxError:
+                exec(calc, globals(), globals())
+                print("ok")
+                continue
             except Exception:
-                res = eval(calc.lower())
+                try:
+                    res = eval(calc.lower(), globals(), globals())
+                except SyntaxError:
+                    exec(calc.lower(), globals(), globals())
+                    print("ok")
+                    continue
 
             if res == "exit":
                 exit()
