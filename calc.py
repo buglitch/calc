@@ -23,14 +23,15 @@ from fractions import *
 from random import *
 from statistics import *
 
-false=False
-true=True
-none=None
-null=None
-j=1j
-i=j
-infi=infj
-nani=nanj
+false = False
+true = True
+none = None
+null = None
+j = 1j
+i = j
+infi = infj
+nani = nanj
+phi = (1 + sqrt(5)) / 2
 
 for k, v in list(globals().items()):
     if not "__" in k and not k.isupper() and not k.islower():
