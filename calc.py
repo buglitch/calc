@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import logging
 import os
+import pty
 import re
 import readline
-import types
 import sys
+import types
 
 import numbers
 import math
@@ -123,7 +124,7 @@ try:
         except Exception as err:
             func_r = r"^[a-zA-Z_][a-zA-Z0-9_]*"
             if re.match(func_r + r"$", calc) or re.match(func_r + r" ", calc):
-                ret = os.system(calc)
+                ret = pty.spawn(["/bin/sh", "-lc", calc])
                 if ret != 0:
                     print("ret: {0:d}\tsig: {1:d}\thex: {0:02X} {1:02X}".format(ret // 0x100, ret % 0x100))
             else:
