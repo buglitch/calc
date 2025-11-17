@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import logging
 import os
-import pty
 import re
 import readline
 import sys
@@ -24,14 +23,20 @@ from random import *
 from statistics import *
 
 false = False
+no = False
 true = True
+yes = True
+nil = None
 none = None
 null = None
-j = 1j
+undefined = None
 i = j
+j = 1j
 infi = infj
 nani = nanj
 phi = (1 + sqrt(5)) / 2
+
+ENV = os.environ.copy()
 
 for k, v in list(globals().items()):
     if not "__" in k and not k.isupper() and not k.islower():
@@ -125,7 +130,7 @@ try:
         except Exception as err:
             func_r = r"^[a-zA-Z_][a-zA-Z0-9_]*"
             if re.match(func_r + r"$", calc) or re.match(func_r + r" ", calc):
-                ret = pty.spawn(["/bin/sh", "-lc", calc])
+                ret = os.system(calc)
                 if ret != 0:
                     print("ret: {0:d}\tsig: {1:d}\thex: {0:02X} {1:02X}".format(ret // 0x100, ret % 0x100))
             else:
